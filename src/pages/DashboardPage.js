@@ -1,7 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const DashboardPage = () => {
   const [activeTab, setActiveTab] = useState("default"); // Tracks the selected card
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            navigate("/"); // Redirect to the login page if no token is found
+        }
+    } , [navigate]);
 
   return (
     <div className="min-h-screen bg-gray-100">
