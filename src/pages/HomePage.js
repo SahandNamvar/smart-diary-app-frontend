@@ -82,7 +82,7 @@ const HomePage = () => {
             {/* Website Title */}
             <div className='text-center text-gray-200 p-4'>
                 <h1 className='text-4xl font-bold mt-8 mb-4 text-teal-200'>Smart Personal Diary</h1>
-                <h3 classname='text-xl mb-4'>
+                <h3 className='text-xl mb-4'>
                     A simple and secure way to keep your thoughts and ideas organized, gain AI-driven insights, and track your mood!
                 </h3>
             </div>
