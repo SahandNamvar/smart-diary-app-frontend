@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Lottie from 'lottie-react';
 import LandingPageAnimation from '../assets/LandingPageAnimation.json';
-import axios from "../utils/api"; // Use API Helper
+import api from "../utils/api"; // Axios instance with JWT handling
 import { useNavigate } from "react-router-dom"; // For redirecting
 
 const HomePage = () => {
@@ -45,7 +45,7 @@ const HomePage = () => {
 
             // Make a POST request to the server
             const url = isLogin ? "/auth/login" : "/auth/register";
-            const res = await axios.post(url, payload);
+            const res = await api.post(url, payload);
 
             // Save the token and user data in local storage
             localStorage.setItem("token", res.data.token);
@@ -55,6 +55,7 @@ const HomePage = () => {
             navigate("/dashboard");
         } catch (err) {
             let message = err.response?.data?.message || "An error occurred";
+            // If the error is a validation error, extract the error message (this happens when the error comes directly from the User model)
             if (message === "Validation error") {
                 message = err.response.data.errors.map((e) => e.msg).join("\n");
             }

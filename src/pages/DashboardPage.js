@@ -12,12 +12,19 @@ const DashboardPage = () => {
         }
     } , [navigate]);
 
+    // Logout function
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        navigate("/");
+    };
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Navigation Bar */}
       <nav className="bg-white shadow-lg p-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-800">Smart Diary</h1>
-        <button className="text-gray-600 hover:text-gray-800">Logout</button>
+        <button className="text-gray-600 hover:text-gray-800" onClick={handleLogout}>Logout</button>
       </nav>
 
       {/* Dashboard Cards */}
