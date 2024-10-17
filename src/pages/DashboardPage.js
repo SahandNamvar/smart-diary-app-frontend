@@ -10,6 +10,7 @@ const DashboardPage = () => {
   const [gptResponse, setGptResponse] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -28,7 +29,7 @@ const DashboardPage = () => {
     if (gptResponse) {
       const timer = setTimeout(() => {
         setGptResponse("");
-      } , 10000);
+      } , 30000);
       return () => clearTimeout(timer);
     }
   } , [success, navigate, error, gptResponse]);
@@ -39,10 +40,12 @@ const DashboardPage = () => {
     setError("");
     setSuccess(false);
     setGptResponse("");
+    setLoading(true);
 
     // Prevent submission if the entry text is empty
     if (!entryText.trim()) {
       setError("Cannot submit an empty diary entry");
+      setLoading(false);
       return;
     }
 
@@ -56,6 +59,8 @@ const DashboardPage = () => {
     } catch (err) {
       setError(err.response?.data?.message || "Error submitting entry");
       //console.error("Error submitting entry:", err);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -157,8 +162,11 @@ const DashboardPage = () => {
                   value={entryText}
                   onChange={(e) => setEntryText(e.target.value)}
                 />
-                <button type="submit" className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold p-3 rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:bg-gradient-to-l">
-                  Save this piece of memory
+                <button 
+                  type="submit" 
+                  className={`w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold p-3 rounded-lg shadow-md hover:shadow-lg 
+                    transition-transform transform hover:bg-gradient-to-l ${loading ? "opacity-50 cursor-not-allowed" : ""}`}>
+                  Save Memory
                 </button>
               </form>
 
