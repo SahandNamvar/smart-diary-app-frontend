@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../utils/api";
 import { FaEye, FaChartBar, FaPenFancy } from "react-icons/fa";
+import Lottie from 'lottie-react';
+import LoadingAnimation from "../assets/LoadingAnimation.json";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
@@ -45,6 +47,13 @@ const DashboardPage = () => {
     // Prevent submission if the entry text is empty
     if (!entryText.trim()) {
       setError("Cannot submit an empty diary entry");
+      setLoading(false);
+      return;
+    }
+
+    // Check if the entry text is too short or too long
+    if (entryText.length < 10 || entryText.length > 500) {
+      setError("Diary entry must be between 10 and 500 characters");
       setLoading(false);
       return;
     }
@@ -152,20 +161,38 @@ const DashboardPage = () => {
           {/* New Diary Entry Form */}
           {activeTab === "newDiary" && (
             <div className="bg-white p-6 rounded-xl shadow-lg bg-opacity-70 backdrop-blur-md">
-              <h2 className="text-xl font-bold mb-4">Share your thoughts here...</h2>
+              <h2 className="text-xl font-bold mb-4">My Personal Space</h2>
               
               <form onSubmit={handleSubmit}>
+                {/* Diary Entry Textarea with Loading animation while submitting form */}
+                <div className="relative">
                 <textarea
-                  className="w-full p-4 mb-4 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Write your thoughts here..."
+                  className={`w-full p-4 mb-4 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500
+                    ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+                  placeholder="Share your thoughts..."
                   rows={window.innerWidth >= 1024 ? 16 : window.innerWidth >= 768 ? 8 : 4} // Default 16 rows for desktop, 8 for tablet, 4 for mobile
                   value={entryText}
                   onChange={(e) => setEntryText(e.target.value)}
+                  disabled={loading} // Disable textarea when loading
                 />
+
+                {/* Loading Animation */}
+                { loading && (
+                  <div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-70 backdrop-blur-md">
+                    <Lottie animationData={LoadingAnimation} loop={true} className="w-80 h-80"/>
+                  </div>
+                )}
+
+                {/* Character Count */}
+                <p className="text-sm text-gray-600 text-right">{entryText.length}/500</p>
+                </div>
+                
                 <button 
                   type="submit" 
                   className={`w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold p-3 rounded-lg shadow-md hover:shadow-lg 
-                    transition-transform transform hover:bg-gradient-to-l ${loading ? "opacity-50 cursor-not-allowed" : ""}`}>
+                    transition-transform transform hover:bg-gradient-to-l ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+                  disabled={loading} // Disable button when loading
+                >
                   Save Memory
                 </button>
               </form>
