@@ -86,11 +86,24 @@ The frontend of **My Smart Diary** is a sleek, responsive React application desi
 
 **Main Features Walkthrough**:
 
-1. HomePage
+### 1. Home Page
 
-   - Landing page with app introduction.
-   - Login Page
-     <img src="./screenshots/login.png" alt="login" width="500"/>
+- Landing page with app introduction.
 
-   - Register Page
-     <img src="./screenshots/registration.png " alt="register" width="500"/>
+| Login Page                                                        | Register Page                                                               |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| <img src="./screenshots/login.png" alt="Login Page" width="400"/> | <img src="./screenshots/registration.png" alt="Register Page" width="400"/> |
+
+### 2. Dashboard
+
+- Diary management
+
+| Add New Diary                                                       | Add New Diary                                                                |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| <img src="./screenshots/newDiary.png" alt="New Diary" width="400"/> | <img src="./screenshots/diaryEntry.png" alt="Diary Entry Form" width="400"/> |
+
+- GPT-3 auto-response generated for the submitted diary entry.
+
+| Auto-Response                                                             |
+| ------------------------------------------------------------------------- |
+| <img src="./screenshots/gptResponse.png" alt="GPT Response" width="400"/> |
