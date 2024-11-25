@@ -68,7 +68,7 @@ The frontend of **My Smart Diary** is a sleek, responsive React application desi
    ```
 3. Set up the backend (optional - for full functionality):
 
-   - Navigate to the `backend` repository and follow the instructions in the [README](../backend/readme.md).
+   - Navigate to the `backend` repository and follow the instructions in the [smart-diary-app-backend](https://github.com/SahandNamvar/smart-diary-app-backend).
 
 4. Start the development server:
 
