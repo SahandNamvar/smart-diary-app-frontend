@@ -1,70 +1,96 @@
-# Getting Started with Create React App
+# My Smart Diary Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+My Smart Diary is a modern, user-friendly web application that allows users to write diary entries, analyze emotional trends, and visualize word clouds. This README is specific to the frontend of the application, which is built with React, Tailwind CSS, and integrated with the backend API.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📜 Project Overview
 
-### `npm start`
+The frontend of **My Smart Diary** is a sleek, responsive React application designed to interact seamlessly with the backend API. Users can:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Write new diary entries.
+- View previous entries.
+- Analyze emotional trends over time with interactive line charts.
+- Explore frequent words in diary entries via a word cloud.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🚀 Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **User Authentication**: Redirects to login if the token is missing.
+2. **Diary Management**:
+   - Create, edit, and delete entries.
+   - Auto-response generated for entries.
+3. **Emotional Trends Visualization**:
+   - Line charts display mood trends over time.
+   - Word clouds visualize frequent words.
+4. **Responsive Design**: Optimized for all screen sizes using Tailwind CSS.
+5. **Loading Animations**: Smooth UX during API interactions.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 📦 Folder Descriptions
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **assets/**: Contains JSON files for animations used in the app.
+- **components/**: Reusable React components. Includes:
+  - `LineChart.js`: Renders mood trend charts using `react-chartjs-2`.
+- **pages/**: Main page-level components for routing:
+  - `DashboardPage.js`: Implements diary management and visualizations.
+  - `HomePage.js`: The landing page with app introduction.
+- **utils/**: Utility functions and API service.
+  - `api.js`: Configures API calls with `axios`.
+- **App.js**: Entry point for React component tree.
+- **App.css**: Styles for the app.
+- **index.js**: Bootstraps the React app.
+- **tailwind.config.js**: Tailwind CSS configuration.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🔧 Installation and Setup
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Prerequisites
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [Node.js](https://nodejs.org/) (v16 or later)
+- [npm](https://www.npmjs.com/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Steps to Install and Run
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Clone the repository:
 
-## Learn More
+   ```bash
+   git clone https://github.com/SahandNamvar/smart-diary-app-frontend.git
+   cd smart-diary-app/frontend
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. Install dependencies:
+   ```bash
+    npm install
+   ```
+3. Set up the backend API URL in .env file:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   ```bash
+   REACT_APP_API_BASE_URL=http://localhost:5000
+   ```
 
-### Code Splitting
+4. Start the development server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   ```bash
+    npm start
+   ```
 
-### Analyzing the Bundle Size
+5. Open the app in your browser at `http://localhost:3000`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 🖥️ Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**Main Features Walkthrough**:
 
-### Advanced Configuration
+1. HomePage
+   - Landing page with app introduction.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Login Page
+<img src="./screenshots/login.png" alt="login" width="500"/>
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Register Page
+<img src="./screenshots/registration.png " alt="register" width="500"/>
