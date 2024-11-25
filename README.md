@@ -107,3 +107,21 @@ The frontend of **My Smart Diary** is a sleek, responsive React application desi
 | Auto-Response                                                             |
 | ------------------------------------------------------------------------- |
 | <img src="./screenshots/gptResponse.png" alt="GPT Response" width="400"/> |
+
+- View previous diary entries.
+
+| View Previous Diaries                                                     | Previous Diaries                                                                       |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| <img src="./screenshots/viewDiaries.png" alt="View Diaries" width="400"/> | <img src="./screenshots/previousDiaries.png" alt="Previous Diaries List" width="400"/> |
+
+- View Specific Diary Entry (Modal)
+
+| View Specific Diary Entry                                                     |
+| ----------------------------------------------------------------------------- |
+| <img src="./screenshots/modal.png" alt="View Diary Entry Modal" width="400"/> |
+
+- Emotional Trends Visualization (Graphs)
+
+| Line Chart (Mood Trends)                                              | Word Cloud (Frequent Words)                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| <img src="./screenshots/lineChart.png" alt="Line Chart" width="400"/> | <img src="./screenshots/wordCloud.png" alt="Word Cloud" width="400"/> |
