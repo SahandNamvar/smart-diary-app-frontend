@@ -66,11 +66,9 @@ The frontend of **My Smart Diary** is a sleek, responsive React application desi
    ```bash
     npm install
    ```
-3. Set up the backend API URL in .env file:
+3. Set up the backend (optional - for full functionality):
 
-   ```bash
-   REACT_APP_API_BASE_URL=http://localhost:5000
-   ```
+   - Navigate to the `backend` repository and follow the instructions in the [README](../backend/readme.md).
 
 4. Start the development server:
 
