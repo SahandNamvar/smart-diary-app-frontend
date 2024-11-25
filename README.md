@@ -59,7 +59,7 @@ The frontend of **My Smart Diary** is a sleek, responsive React application desi
 
    ```bash
    git clone https://github.com/SahandNamvar/smart-diary-app-frontend.git
-   cd smart-diary-app/frontend
+   cd smart-diary-app-frontend
    ```
 
 2. Install dependencies:
