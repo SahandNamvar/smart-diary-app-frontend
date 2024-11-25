@@ -87,10 +87,10 @@ The frontend of **My Smart Diary** is a sleek, responsive React application desi
 **Main Features Walkthrough**:
 
 1. HomePage
+
    - Landing page with app introduction.
+   - Login Page
+     <img src="./screenshots/login.png" alt="login" width="500"/>
 
-Login Page
-<img src="./screenshots/login.png" alt="login" width="500"/>
-
-Register Page
-<img src="./screenshots/registration.png " alt="register" width="500"/>
+   - Register Page
+     <img src="./screenshots/registration.png " alt="register" width="500"/>
