@@ -4,6 +4,8 @@ import api from "../utils/api";
 import { FaEye, FaChartBar, FaPenFancy } from "react-icons/fa";
 import Lottie from "lottie-react";
 import LoadingAnimation from "../assets/LoadingAnimation.json";
+import LineChart from "../components/LineChart";
+import WordCloud from "react-d3-cloud";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
@@ -147,6 +149,79 @@ const DashboardPage = () => {
     }
   };
 
+  // Helper functions to process the fetched data for Mood Trends & Word Frequencies
+  const getMoodTrends = (entries) => {
+    return entries.map((entry) => ({
+      date: new Date(entry.createdAt).toLocaleDateString(),
+      sentiment_score: entry.sentiment_score,
+    }));
+  };
+
+  const getWordFrequencies = (entries) => {
+    const stopWords = [
+      "and",
+      "or",
+      "the",
+      "a",
+      "an",
+      "is",
+      "to",
+      "in",
+      "of",
+      "on",
+      "at",
+      "for",
+      "with",
+      "by",
+      "from",
+      "that",
+      "this",
+      "it",
+      "as",
+      "be",
+      "was",
+      "were",
+      "are",
+      "am",
+      "will",
+      "has",
+      "just",
+      "but",
+      "not",
+      "so",
+      "no",
+      "yes",
+      "if",
+      "else",
+      "then",
+      "there",
+      "here",
+      "today",
+      "its",
+    ];
+    const wordCounts = {};
+
+    entries.forEach((entry) => {
+      const words = entry.text_entry
+        .toLowerCase()
+        .replace(/[^a-z\s]/g, "") // Removes non-alphabetic characters
+        .split(/\s+/) // Splits into words
+        .filter((word) => !stopWords.includes(word) && word.length > 2); // Exclude stop words and short words
+
+      words.forEach((word) => {
+        wordCounts[word] = (wordCounts[word] || 0) + 1; // Count occurrences
+      });
+    });
+
+    console.log("Total entries:", entries.length); // Logs total entries processed
+    console.log("Unique words count:", Object.keys(wordCounts).length); // Logs the number of unique words
+
+    return Object.entries(wordCounts)
+      .map(([text, value]) => ({ text, value }))
+      .sort((a, b) => b.value - a.value) // Sort by frequency
+      .slice(0, 50); // Get top 50
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-purple-100">
       {/* Top Message Banner (Error & Success) */}
@@ -245,7 +320,9 @@ const DashboardPage = () => {
           {/* View Diaries */}
           {activeTab === "viewDiaries" && (
             <div className="bg-white p-6 rounded-xl shadow-lg bg-opacity-70 backdrop-blur-md overflow-y-auto max-h-full">
-              <h2 className="text-xl font-bold mb-4">Your Previous Diaries</h2>
+              <h2 className="text-xl font-bold mb-4">
+                Your Previous Diaries {`(${entries.length})`}
+              </h2>
 
               {error && <p className="text-red-600">{error}</p>}
 
@@ -266,7 +343,9 @@ const DashboardPage = () => {
                     </div>
                   ))
                 ) : (
-                  <p className="text-gray-600">No diary entries found.</p>
+                  <p className="text-gray-600">
+                    No diary entries found - Write your first diary entry!
+                  </p>
                 )}
               </div>
             </div>
@@ -342,9 +421,61 @@ const DashboardPage = () => {
           {activeTab === "graphs" && (
             <div className="bg-white p-6 rounded-xl shadow-lg bg-opacity-70 backdrop-blur-md">
               <h2 className="text-xl font-bold mb-4">Emotional Trends</h2>
-              <p className="text-gray-600">
-                [Here we will display mood graphs and word clouds.]
-              </p>
+
+              {error && <p className="text-red-600">{error}</p>}
+              {loading && (
+                <div className="flex justify-center items-center">
+                  <Lottie
+                    animationData={LoadingAnimation}
+                    loop={true}
+                    className="w-40 h-40"
+                  />
+                </div>
+              )}
+
+              {!loading && entries.length > 0 ? (
+                <>
+                  {/* Mood Trends */}
+                  <div className="mb-8">
+                    <h3 className="text-lg font-semibold mb-2">
+                      Mood Trends Over Time
+                    </h3>
+                    <LineChart moodTrends={getMoodTrends(entries)} />
+                  </div>
+
+                  {/* Frequent Words */}
+                  <div className="border border-gray-200 p-4 rounded-lg shadow-md">
+                    <h3 className="text-lg font-semibold mb-4">
+                      Word Frequencies
+                    </h3>
+                    <WordCloud
+                      data={getWordFrequencies(entries)}
+                      font="serif"
+                      fontWeight="bold"
+                      fontSize={(word) =>
+                        Math.max(Math.log2(word.value) * 20, 12)
+                      } // Ensures minimum size
+                      rotate={(word) => word.value % 90} // Random rotation
+                      padding={8}
+                      spiral="archimedean"
+                      fill={(d) => `hsl(${Math.random() * 360}, 80%, 70%)`} // Colorful words
+                      width={600}
+                      height={300}
+                    />
+
+                    {/* Pin the following to the right side */}
+                    <p className="text-sm text-gray-600 mt-4 italic flex justify-end">
+                      {" "}
+                      {`Top 50 words`}{" "}
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <p className="text-gray-600">
+                  Not enough data to generate graphs. Write more diary entries
+                  to see insights!
+                </p>
+              )}
             </div>
           )}
 
